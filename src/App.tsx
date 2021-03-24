@@ -2,6 +2,8 @@ import { Switch, Route } from 'react-router-dom'
 
 import * as ROUTES from './constants/routes'
 
+import Navbar from './components/Navbar'
+
 import HomePage from './pages/Home'
 import CreatePostPage from './pages/CreatePost'
 import DashboardPage from './pages/Dashboard'
@@ -13,6 +15,7 @@ import Signup from './pages/Signup'
 const App = () => {
   return (
     <div>
+      <Navbar />
       <Switch>
         <Route path={ROUTES.Signup} component={Signup} />
         <Route path={ROUTES.Login} component={Login} />
