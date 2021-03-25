@@ -4,7 +4,7 @@ import { Redirect } from 'react-router'
 import * as ROUTES from '../constants/routes'
 
 import { useAppDispatch } from '../store/dispatch'
-import { signupThunk } from '../store/thunks'
+import { signupThunk } from '../store/thunks/signup.thunk'
 import * as selectors from '../store/selectors'
 
 

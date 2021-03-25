@@ -5,11 +5,9 @@ import {
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  SignupAction,
-  SIGNUP_FAILURE,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS
-} from './actions'
+} from './actions/login.actions'
+
+import { SignupAction, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from './actions/signup.actions'
 
 const reducer = (state: AppState = DefaultAppState, action: LoginAction | SignupAction): AppState => {
   switch ( action.type ) {
