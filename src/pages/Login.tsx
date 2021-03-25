@@ -1,18 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 
 import * as ROUTES from '../constants/routes'
 
-import { AppDispatch } from '../store/dispatch'
+import { useAppDispatch} from '../store/dispatch'
 import { loginThunk } from '../store/thunks'
-import { AppState } from '../store/state'
+import * as selectors from '../store/selectors'
 
 import LoginForm from '../forms/LoginForm'
 
 
 const Login = (): JSX.Element => {
-  const dispatch: AppDispatch = useDispatch()
-  const isAuthenticated = useSelector<AppState, boolean>(state => state.user !== null)
+  const dispatch = useAppDispatch()
+  const isAuthenticated = useSelector(selectors.isAuthenticated)
 
   const onLogin = (data: { username: string, password: string }) => {
     dispatch(loginThunk(data))

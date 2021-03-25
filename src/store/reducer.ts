@@ -1,10 +1,19 @@
 import { AppState, DefaultAppState } from './state'
 
-import * as loginActions from './actions'
+import { 
+  LoginAction,
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  SignupAction,
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS
+} from './actions'
 
-const reducer = (state: AppState = DefaultAppState, action: loginActions.LoginAction): AppState => {
+const reducer = (state: AppState = DefaultAppState, action: LoginAction | SignupAction): AppState => {
   switch ( action.type ) {
-    case loginActions.LOGIN_REQUEST: {
+    case LOGIN_REQUEST: {
       return {
         ...state,
         user: null,
@@ -13,7 +22,7 @@ const reducer = (state: AppState = DefaultAppState, action: loginActions.LoginAc
       }
     }
 
-    case loginActions.LOGIN_SUCCESS: {
+    case LOGIN_SUCCESS: {
       return {
         ...state,
         user: action.payload,
@@ -22,12 +31,39 @@ const reducer = (state: AppState = DefaultAppState, action: loginActions.LoginAc
       }
     }
 
-    case loginActions.LOGIN_FAILURE: {
+    case LOGIN_FAILURE: {
       return {
         ...state,
         error: action.payload,
         user: null,
         isLoading: false
+      }
+    }
+
+    case SIGNUP_FAILURE: {
+      return {
+        ...state,
+        error: action.payload,
+        user: null,
+        isLoading: false
+      }
+    }
+
+    case SIGNUP_SUCCESS: {
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false,
+        error: null
+      }
+    }
+
+    case SIGNUP_REQUEST: {
+      return {
+        ...state,
+        user: null,
+        isLoading: true,
+        error: null
       }
     }
 

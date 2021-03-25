@@ -1,7 +1,12 @@
 import { ThunkDispatch } from 'redux-thunk'
+import { useDispatch } from 'react-redux'
 
 import { AppState } from './state'
 
-import * as login from './actions'
+import { LoginAction, SignupAction } from './actions'
 
-export type AppDispatch = ThunkDispatch<AppState, any, login.LoginAction>
+export type AppDispatch = ThunkDispatch<AppState, any, LoginAction | SignupAction>
+
+export const useAppDispatch = (): AppDispatch => {
+  return useDispatch()
+}

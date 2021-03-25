@@ -9,6 +9,7 @@ const Navbar = () => {
       <Link to={ROUTES.Dashboard}>Dashbard</Link>
       <Link to={ROUTES.CreatePost}>Create Post</Link>
       <Link to={ROUTES.Login}>Login</Link>
+      <Link to={ROUTES.Signup}>Signup</Link>
     </nav>
   )
 }
