@@ -9,7 +9,9 @@ import {
 
 import { SignupAction, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from './actions/signup.actions'
 
-const reducer = (state: AppState = DefaultAppState, action: LoginAction | SignupAction): AppState => {
+import { LogoutAction, LOGOUT_REQUEST } from './actions/logout.actions'
+
+const reducer = (state: AppState = DefaultAppState, action: LoginAction | SignupAction | LogoutAction): AppState => {
   switch ( action.type ) {
     case LOGIN_REQUEST: {
       return {
@@ -61,6 +63,15 @@ const reducer = (state: AppState = DefaultAppState, action: LoginAction | Signup
         ...state,
         user: null,
         isLoading: true,
+        error: null
+      }
+    }
+
+    case LOGOUT_REQUEST: {
+      return {
+        ...state,
+        user: null,
+        isLoading: false,
         error: null
       }
     }
