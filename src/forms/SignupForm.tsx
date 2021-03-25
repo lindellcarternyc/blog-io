@@ -1,7 +1,8 @@
-import { useForm } from 'react-hook-form'
+import { useForm } from './hooks'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
+import { Form, Segment, Button } from 'semantic-ui-react'
 import FormInput from './components/FormInput'
 
 const schema = yup.object().shape({
@@ -17,8 +18,14 @@ interface SignupFormProps {
   }): void
 }
 
+interface SignupFormData {
+  username: string
+  password: string
+  confirmPassword: string
+}
+
 const SignupForm = (props: SignupFormProps): JSX.Element => {
-  const { handleSubmit, register, errors, formState: { touched, isValid } } = useForm({
+  const { handleSubmit, control, formState, getError } = useForm<SignupFormData>({
     mode: 'onTouched',
     resolver: yupResolver(schema),
     defaultValues: {
@@ -30,33 +37,40 @@ const SignupForm = (props: SignupFormProps): JSX.Element => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(props.onSubmit)}>
-        <FormInput 
-          id="username"
-          name="username"
-          labelText="Username"
-          ref={register}
-          touched={touched.username}
-          error={errors.username?.message}
-        />
-        <FormInput 
-          id="password"
-          name="password"
-          labelText="Password"
-          ref={register}
-          touched={touched.password}
-          error={errors.password?.message}
-        />
-        <FormInput 
-          id="confirmPassword"
-          name="confirmPassword"
-          labelText="Confirm Password"
-          ref={register}
-          touched={touched.confirmPassword}
-          error={errors.confirmPassword?.message}
-        />
-        <button type="submit" disabled={!isValid}>Sign Up</button>
-      </form>
+      <Form onSubmit={handleSubmit(props.onSubmit)} size="large">
+        <Segment>
+          <FormInput 
+            id="username"
+            control={control}
+            icon="user"
+            iconPosition="left"
+            placeholder="Username"
+            fluid
+            error={getError('username')}
+          />
+          <FormInput 
+            id="password"
+            control={control}
+            type="password"
+            icon="lock"
+            iconPosition="left"
+            placeholder="Password"
+            fluid
+            error={getError('password')}
+          />
+          <FormInput 
+            id="confirmPassword"
+            control={control}
+            type="password"
+            icon="lock"
+            iconPosition="left"
+            placeholder="Confirm Password"
+            fluid
+            error={getError('confirmPassword')}
+          />
+          <Button type="submit" disabled={!formState.isValid}>Sign Up</Button>
+        </Segment>
+      </Form>
     </div>
   )
 }

@@ -1,23 +1,36 @@
-import React from "react"
+import { FormInput, FormInputProps  } from 'semantic-ui-react'
+import { Control, Controller } from 'react-hook-form'
 
-interface FormInputProps {
-  labelText: string
+interface SemFormInputProps extends FormInputProps {
+  name?: string
   id: string
-  name: string
-  touched?: boolean
+  control: Control
   error?: string
-  type?: 'text' | 'password' | 'email' | 'number'
 }
 
-const FormInput = React.forwardRef((props: FormInputProps, ref: React.Ref<HTMLInputElement>) => {
-  const { labelText, id, name, touched, error, type} = props
-  return (
-    <div>
-      <label htmlFor={id}>{labelText}: </label>
-      <input id={id} name={name} ref={ref} type={type}/>
-      {touched && error && <p>{error}</p>}
-    </div>
-  )
-})
+const SemFormInput = (props: SemFormInputProps): JSX.Element => {
+  const { control, id, error, ...rest } = props
+  const name = props.name || id
 
-export default FormInput
+  return (
+    <Controller 
+      name={name}
+      control={control}
+      render={({ onChange, onBlur, value }) => {
+        return (
+          <FormInput
+            {...rest}
+            id={id}
+            name={name} 
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+            error={error}
+          />
+        )
+      }}
+    />
+  )
+}
+
+export default SemFormInput

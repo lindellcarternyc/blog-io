@@ -1,6 +1,8 @@
-import { useForm } from 'react-hook-form'
+// import { useForm } from 'react-hook-form'
+import { useForm } from './hooks'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { Form, Segment, Button } from 'semantic-ui-react'
 
 import FormInput from './components/FormInput'
 
@@ -14,38 +16,43 @@ interface LoginFormProps {
 }
 
 const LoginForm = (props: LoginFormProps): JSX.Element => {
-  const { handleSubmit, register, errors, formState: { touched, isValid }} = useForm({
+  const { control, handleSubmit, getError, formState } = useForm({
     defaultValues: {
       username: '',
       password: ''
     },
-    mode: 'onBlur',
+    mode: 'onTouched',
     resolver: yupResolver(schema)
   })
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(props.onSubmit)}>
-        <FormInput 
-          id="username"
-          name="username"
-          labelText="Username"
-          ref={register}
-          touched={touched.username}
-          error={errors.username?.message}
-        />
-        <FormInput 
-          id="password"
-          name="password"
-          labelText="Password"
-          ref={register}
-          touched={touched.password}
-          error={errors.password?.message}
-          type="password"
-        />
-        <button disabled={!isValid} type="submit">Log In</button>
-      </form>
-    </div>
+    <>
+      <Form onSubmit={handleSubmit(props.onSubmit)} size="large">
+        <Segment>
+          <FormInput 
+            id="username"
+            control={control}
+            icon="user"
+            iconPosition="left"
+            placeholder="Username"
+            fluid
+            error={getError('username')}
+          />
+          <FormInput 
+            id="password"
+            control={control}
+            type="password"
+            icon="lock"
+            iconPosition="left"
+            placeholder="Password"
+            fluid
+            error={getError('password')}
+          />
+          <Button disabled={!formState.isValid} type="submit">Log In
+          </Button>
+        </Segment>
+      </Form>
+    </>
   )
 }
 

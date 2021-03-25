@@ -7,8 +7,7 @@ import { useAppDispatch } from '../store/dispatch'
 import { signupThunk } from '../store/thunks/signup.thunk'
 import * as selectors from '../store/selectors'
 
-
-
+import { Grid, Header } from 'semantic-ui-react'
 import SignupForm from '../forms/SignupForm'
 
 
@@ -25,10 +24,12 @@ const Signup = (): JSX.Element => {
   }
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <SignupForm onSubmit={onSignup} />
-    </div>
+    <Grid textAlign="center" style={{ height: '100vh', marginTop: '' }}>
+      <Grid.Column>
+        <Header as="h2">Sign Up</Header>
+        <SignupForm onSubmit={onSignup} />
+      </Grid.Column>
+    </Grid>
   )
 }
 

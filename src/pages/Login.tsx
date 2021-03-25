@@ -7,6 +7,7 @@ import { useAppDispatch } from '../store/dispatch'
 import { loginThunk } from '../store/thunks/login.thunk'
 import * as selectors from '../store/selectors'
 
+import { Grid, Header } from 'semantic-ui-react'
 import LoginForm from '../forms/LoginForm'
 
 
@@ -23,10 +24,12 @@ const Login = (): JSX.Element => {
   }
   
   return (
-    <div>
-      <h2>Login</h2>
-      <LoginForm onSubmit={onLogin} />
-    </div>
+    <Grid textAlign="center" style={{ height: '100vh', marginTop: '-5rem'}} verticalAlign="middle">
+      <Grid.Column>
+        <Header as="h2">Login</Header>
+        <LoginForm onSubmit={onLogin} />
+      </Grid.Column>
+    </Grid>
   )
 }
 
