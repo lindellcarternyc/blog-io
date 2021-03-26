@@ -1,17 +1,17 @@
-import { AppState, DefaultAppState } from './state'
+import { AppState, DefaultAppState } from '../state'
 
 import { 
   LoginAction,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-} from './actions/login.actions'
+} from '../actions/login.actions'
 
-import { SignupAction, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from './actions/signup.actions'
+import { SignupAction, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from '../actions/signup.actions'
 
-import { LogoutAction, LOGOUT_REQUEST } from './actions/logout.actions'
+import { LogoutAction, LOGOUT_REQUEST } from '../actions/logout.actions'
 
-const reducer = (state: AppState = DefaultAppState, action: LoginAction | SignupAction | LogoutAction): AppState => {
+const reducer = (state: AppState['userState'] = DefaultAppState.userState, action: LoginAction | SignupAction | LogoutAction): AppState['userState'] => {
   switch ( action.type ) {
     case LOGIN_REQUEST: {
       return {

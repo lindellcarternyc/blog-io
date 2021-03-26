@@ -7,3 +7,6 @@ export interface PostModel {
   createdAt: Date
   editedAt: Date
 }
+
+export type CreatePostModel 
+  = Omit<PostModel, 'id' | 'createdAt' | 'editedAt'>

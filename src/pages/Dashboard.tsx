@@ -5,29 +5,17 @@ import * as selectors from '../store/selectors'
 import * as ROUTES from '../constants/routes'
 
 import { Grid, Button, Header } from 'semantic-ui-react'
-import { PostModel } from '../models/Post.model'
 import PostPreviewList from '../components/PostPreviewList'
+import { useEffect } from 'react'
 
-const POSTS: PostModel[] = [
-  { 
-    id: 'post1',
-    title: 'post1',
-    createdAt: new Date(),
-    editedAt: new Date(),
-    author: 'Lindell',
-    content: 'This is a post'
-  }, {
-    id: 'post2',
-    title: 'post2',
-    subtitle: 'A post with a subtitle',
-    createdAt: new Date(),
-    editedAt: new Date(),
-    author: 'Lindell',
-    content: 'This is the second post'
-  }
-]
 const Dashboard = (): JSX.Element => {
   const currentUser = useSelector(selectors.currentUser)
+  const posts = useSelector(selectors.currentUserPosts)
+
+  useEffect(() => {
+
+  })
+
   if (!currentUser) {
     return <Redirect to={ROUTES.Home} />
   }
@@ -48,7 +36,7 @@ const Dashboard = (): JSX.Element => {
       <Grid.Row columns={1}>
         <Grid.Column>
           <PostPreviewList 
-            posts={POSTS}
+            posts={posts}
           />
         </Grid.Column>
       </Grid.Row>

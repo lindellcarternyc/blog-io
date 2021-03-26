@@ -1,49 +1,42 @@
-import { v4 as uuid } from 'uuid'
+import { CreateUserModel, LoginUserModel, UserModel } from '../models/User.model'
+import * as UserCollection from '../data/users'
 
-const USERS: Record<string, { username: string, password: string, id: string }> = {
-  'user1': {
-    username: 'lindell',
-    password: 'password',
-    id: 'user1'
-  },
-  'user2': {
-    username: 'jason',
-    password: 'password',
-    id: 'user2'
-  }
-}
+import { PostModel } from '../models/Post.model'
+import * as PostsCollection from '../data/posts'
 
-const getObjectKeys = <T>(obj: T): Array<keyof T> => {
-  return Object.keys(obj) as Array<keyof T>
-}
-
-export const login = async (data: { username: string, password: string }): Promise<{ username: string, id: string }> => {
-  for (const id of getObjectKeys(USERS)) {
-    const user = USERS[id]
-    if (user.username === data.username) {
+export const login = async (data: LoginUserModel): Promise<UserModel> => {
+  try {
+    const user = await UserCollection.getUserByUsername(data.username)
+    if (user) {
       if (user.password === data.password) {
-        return { username: data.username, id }
+        return {
+          id: user.id,
+          username: user.username
+        }
+      } else {
+        throw new Error('Incorrect password')
       }
-      throw new Error(`Incorrect password.`)
     }
+    throw new Error('No User Found')
+  } catch (err) {
+    throw err
   }
-
-  throw new Error(`No user found.`)
 }
 
-export const signup = async (data: { username: string, password: string }): Promise<{ username: string, id: string }> => {
-  for (const id of getObjectKeys(USERS)) {
-    if (USERS[id].username === data.username) {
-      throw new Error(`That username already exists.`)
-    }
+export const signup = async (data: CreateUserModel): Promise<UserModel> => {
+  try {
+    const newUser = await UserCollection.createUser(data)
+    return newUser
+  } catch (err) {
+    throw err
   }
+}
 
-  const id = uuid()
-  USERS[id] = {
-    id,
-    username: data.username,
-    password: data.password
+export const fetchPostsByAuthorId = async (authorId: string): Promise<PostModel[]> => {
+  try {
+    const posts = await PostsCollection.getPostsByAuthorId(authorId)
+    return posts
+  } catch (err) {
+    throw err
   }
-
-  return { id, username: data.username }
 }
