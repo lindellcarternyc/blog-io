@@ -14,12 +14,11 @@ export const DefaultUserState: UserState = {
   error: null
 }
 
-export type PostsState = AsyncState<{ posts: PostModel[], createdPostId: string | null }>
+export type PostsState = AsyncState<{ posts: PostModel[] }>
 export const DefaultPostsState: PostsState = {
   posts: [],
   isLoading: false,
   error: null,
-  createdPostId: null
 }
 
 export interface AppState {

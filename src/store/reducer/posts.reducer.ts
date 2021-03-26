@@ -10,7 +10,6 @@ const postsReducer = (state: PostsState = DefaultPostsState, action: PostAction)
   switch (action.type) {
     case FETCH_POSTS_REQUEST: {
       return {
-        createdPostId: null,
         posts: [],
         isLoading: true,
         error: null
@@ -19,7 +18,6 @@ const postsReducer = (state: PostsState = DefaultPostsState, action: PostAction)
 
     case FETCH_POSTS_SUCCESS: {
       return {
-        createdPostId: null,
         posts: action.payload,
         isLoading: false,
         error: null
@@ -28,7 +26,6 @@ const postsReducer = (state: PostsState = DefaultPostsState, action: PostAction)
 
     case FETCH_POSTS_FAILURE: {
       return {
-        createdPostId: null,
         posts: state.posts,
         isLoading: false,
         error: action.payload
@@ -38,7 +35,6 @@ const postsReducer = (state: PostsState = DefaultPostsState, action: PostAction)
     case CREATE_POST_REQUEST: {
       return {
         posts: state.posts,
-        createdPostId: null,
         isLoading: true,
         error: null
       }
@@ -46,7 +42,6 @@ const postsReducer = (state: PostsState = DefaultPostsState, action: PostAction)
 
     case CREATE_POST_SUCCESS: {
       return {
-        createdPostId: action.payload.id,
         error: null,
         isLoading: false,
         posts: state.posts.concat(action.payload)
@@ -56,7 +51,6 @@ const postsReducer = (state: PostsState = DefaultPostsState, action: PostAction)
     case CREATE_POST_FAILURE: {
       return {
         posts: state.posts,
-        createdPostId: null,
         error: action.payload,
         isLoading: false
       }

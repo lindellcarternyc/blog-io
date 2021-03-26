@@ -13,6 +13,12 @@ export const currentUserPosts = (state: AppState): PostModel[] => {
   return state.postsState.posts
 }
 
-export const createdPostId = (state: AppState): string | null => {
-  return state.postsState.createdPostId
+export const postById = (postID: string) => (state: AppState): PostModel | null => {
+  const allPosts = state.postsState.posts
+  for (const post of allPosts) {
+    if (post.id === postID) {
+      return post
+    }
+  }
+  return null
 }
