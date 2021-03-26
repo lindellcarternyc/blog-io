@@ -12,3 +12,7 @@ export const currentUser = (state: AppState): { username: string, id: string } |
 export const currentUserPosts = (state: AppState): PostModel[] => {
   return state.postsState.posts
 }
+
+export const createdPostId = (state: AppState): string | null => {
+  return state.postsState.createdPostId
+}

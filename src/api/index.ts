@@ -1,7 +1,7 @@
 import { CreateUserModel, LoginUserModel, UserModel } from '../models/User.model'
 import * as UserCollection from '../data/users'
 
-import { PostModel } from '../models/Post.model'
+import { CreatePostModel, PostModel } from '../models/Post.model'
 import * as PostsCollection from '../data/posts'
 
 export const login = async (data: LoginUserModel): Promise<UserModel> => {
@@ -40,3 +40,12 @@ export const fetchPostsByAuthorId = async (authorId: string): Promise<PostModel[
     throw err
   }
 }
+
+export const createPost = async (data: CreatePostModel): Promise<PostModel> => {
+  try {
+    const newPost = await PostsCollection.createPost(data)
+    return newPost
+  } catch (err) {
+    throw err
+  }
+} 

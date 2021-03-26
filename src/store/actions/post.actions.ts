@@ -23,3 +23,32 @@ export type FetchPostsAction
   = ReturnType<typeof fetchPostsRequest>
   | ReturnType<typeof fetchPostsFailure>
   | ReturnType<typeof fetchPostsSuccess>
+
+export const CREATE_POST_REQUEST = '@@CREATE_POST_REQUEST' as const
+export const createPostRequest = () => ({ type: CREATE_POST_REQUEST })
+
+export const CREATE_POST_SUCCESS = '@@CREATE_POST_SUCCESS' as const
+export const createPostSuccess = (post: PostModel) => {
+  return {
+    type: CREATE_POST_SUCCESS,
+    payload: post
+  }
+}
+
+export const CREATE_POST_FAILURE = '@@CREATE_POST_FAILURE' as const
+export const createPostFailure = (error: string) => {
+  return {
+    type: CREATE_POST_FAILURE,
+    payload: error
+  }
+}
+
+export type CreatePostAction 
+  = ReturnType<typeof createPostRequest>
+  | ReturnType<typeof createPostSuccess>
+  | ReturnType<typeof createPostFailure>
+
+  
+export type PostAction 
+  = FetchPostsAction
+  | CreatePostAction
