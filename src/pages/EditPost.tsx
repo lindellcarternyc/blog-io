@@ -1,4 +1,4 @@
-import { Redirect, useHistory, useParams } from 'react-router'
+import { Redirect, useParams } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 import { Grid, Header } from 'semantic-ui-react'
@@ -8,12 +8,12 @@ import * as selectors from '../store/selectors'
 import * as ROUTES from '../constants/routes'
 
 import { editPost } from '../store/features/posts/posts.slice'
+import { PrivateRouteComponent } from '../components/PrivateRoute'
 
-const EditPost = (): JSX.Element => {
+const EditPost: PrivateRouteComponent = ({ history }) => {
   const { postID } = useParams<{ postID: string }>()
   const postToEdit = useAppSelector(selectors.postById(postID))
   const dispatch = useAppDispatch()
-  const history = useHistory()
 
   if (!postToEdit) {
     return <Redirect to={ROUTES.Dashboard} />

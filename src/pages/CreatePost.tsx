@@ -1,27 +1,20 @@
-import { Redirect, useHistory } from 'react-router'
-import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { useAppDispatch } from '../store/hooks'
 
 import { Grid, Header } from 'semantic-ui-react'
 
 import PostForm, { PostFormData } from '../forms/PostForm'
-
-import * as selectors from '../store/selectors'
 import * as ROUTES from '../constants/routes'
 
 import { createPost } from '../store/features/posts/posts.slice'
+import { PrivateRouteComponent } from '../components/PrivateRoute'
 
-const CreatePost = (): JSX.Element => {
-  const currentUser = useAppSelector(selectors.currentUser)
-  const history = useHistory()
+const CreatePost: PrivateRouteComponent = ({ user, history }) => {
   const dispatch = useAppDispatch()
-  if (!currentUser) {
-    return <Redirect to={ROUTES.Home}/>
-  }
 
   const onSubmit = (data: PostFormData) => {
     dispatch(createPost({
       ...data,
-      author: currentUser.id
+      author: user.id
     })).then(({ payload }) => {
       const { id } = payload as { id: string }
       history.push(ROUTES.ViewPost.replace(/:postID/, id))

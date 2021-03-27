@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from './store/hooks'
 
 import * as ROUTES from './constants/routes'
 
+import PrivateRoute from './components/PrivateRoute'
 import Main from './components/Main'
 import Navbar from './components/Navbar'
 
@@ -35,10 +36,10 @@ const App = () => {
         <Switch>
           <Route path={ROUTES.Signup} component={Signup} />
           <Route path={ROUTES.Login} component={Login} />
-          <Route path={ROUTES.EditPost} component={EditPostPage} />
-          <Route path={ROUTES.CreatePost} component={CreatePostPage} />
-          <Route path={ROUTES.ViewPost} component={ViewPostPage} />
-          <Route path={ROUTES.Dashboard} component={DashboardPage} />
+          <PrivateRoute path={ROUTES.EditPost} component={EditPostPage} />
+          <PrivateRoute path={ROUTES.CreatePost} component={CreatePostPage} />
+          <PrivateRoute path={ROUTES.ViewPost} component={ViewPostPage} />
+          <PrivateRoute path={ROUTES.Dashboard} component={DashboardPage} />
           <Route exact path={ROUTES.Home} component={HomePage} />
         </Switch>
       </Main>

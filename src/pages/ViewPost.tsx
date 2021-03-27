@@ -1,14 +1,14 @@
-import { Redirect, useHistory, useParams } from 'react-router'
+import { Redirect, useParams } from 'react-router'
 import PostView from '../components/PostView'
 
 import * as selectors from '../store/selectors'
 import { useAppSelector } from '../store/hooks'
 import * as ROUTES from '../constants/routes'
+import { PrivateRouteComponent } from '../components/PrivateRoute'
 
-const ViewPost = (): JSX.Element => {
+const ViewPost: PrivateRouteComponent = ({ history }) => {
   const { postID } = useParams<{ postID: string }>()
   const post = useAppSelector(selectors.postById(postID))
-  const history = useHistory()
 
   if (!post) {
     return <Redirect to={ROUTES.Dashboard} />
