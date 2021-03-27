@@ -3,7 +3,7 @@ import { Redirect } from 'react-router'
 import * as ROUTES from '../constants/routes'
 
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { signupThunk } from '../store/thunks/signup.thunk'
+import { signup } from '../store/features/users/users.slice'
 import * as selectors from '../store/selectors'
 
 import { Grid, Header } from 'semantic-ui-react'
@@ -15,7 +15,7 @@ const Signup = (): JSX.Element => {
   const isAuthenticated = useAppSelector(selectors.isAuthenticated)
 
   const onSignup = (data: { username: string, password: string }) => {
-    dispatch(signupThunk(data))
+    dispatch(signup(data))
   }
 
   if (isAuthenticated) {

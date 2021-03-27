@@ -8,7 +8,7 @@ import {
 } from 'semantic-ui-react'
 
 import * as ROUTES from '../constants/routes'
-import { logoutRequest } from '../store/actions/logout.actions'
+import { logout } from '../store/features/users/users.slice'
 import * as selectors from '../store/selectors'
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
   const history = useHistory()
 
   const onClickLogout = () => {
-    dispatch(logoutRequest())
+    dispatch(logout())
   }
 
   const authButtons = (): JSX.Element => {

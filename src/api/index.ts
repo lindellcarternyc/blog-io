@@ -32,6 +32,10 @@ export const signup = async (data: CreateUserModel): Promise<UserModel> => {
   }
 }
 
+export const logout = async () => {
+  return
+}
+
 export const fetchPostsByAuthorId = async (authorId: string): Promise<PostModel[]> => {
   try {
     const posts = await PostsCollection.getPostsByAuthorId(authorId)

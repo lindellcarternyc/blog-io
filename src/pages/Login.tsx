@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 import * as ROUTES from '../constants/routes'
 
-import { loginThunk } from '../store/thunks/login.thunk'
+import { login } from '../store/features/users/users.slice'
 import * as selectors from '../store/selectors'
 
 import { Grid, Header } from 'semantic-ui-react'
@@ -15,7 +15,7 @@ const Login = (): JSX.Element => {
   const isAuthenticated = useAppSelector(selectors.isAuthenticated)
 
   const onLogin = (data: { username: string, password: string }) => {
-    dispatch(loginThunk(data))
+    dispatch(login(data))
   }
 
   if (isAuthenticated) {
