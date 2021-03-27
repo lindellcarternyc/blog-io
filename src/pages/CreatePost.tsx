@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import { Grid, Header } from 'semantic-ui-react'
 
-import CreatePostForm, { CreatePostFormData } from '../forms/CreatePostForm'
+import PostForm, { PostFormData } from '../forms/PostForm'
 import { useAppDispatch } from '../store/dispatch'
 
 import { createPost } from '../store/thunks/posts'
@@ -17,8 +17,7 @@ const CreatePost = (): JSX.Element => {
     return <Redirect to={ROUTES.Home}/>
   }
 
-  const onSubmit = (data: CreatePostFormData) => {
-    console.log(data)
+  const onSubmit = (data: PostFormData) => {
     dispatch(createPost({
       ...data,
       author: currentUser.id
@@ -35,7 +34,7 @@ const CreatePost = (): JSX.Element => {
     <Grid>
       <Grid.Column>
         <Header as="h2">Create New Post</Header>
-        <CreatePostForm onSubmit={onSubmit}/>
+        <PostForm onSubmit={onSubmit}/>
       </Grid.Column>
     </Grid>
   )

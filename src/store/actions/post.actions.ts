@@ -48,7 +48,31 @@ export type CreatePostAction
   | ReturnType<typeof createPostSuccess>
   | ReturnType<typeof createPostFailure>
 
+
+export const EDIT_POST_REQUEST = '@@EDIT_POST_REQUEST' as const
+export const editPostRequest = () => ({ type: EDIT_POST_REQUEST })
+
+export const EDIT_POST_SUCCESS = '@@EDIT_POST_SUCCESS' as const
+export const editPostSuccess = (post: PostModel) => {
+  return {
+    type: EDIT_POST_SUCCESS,
+    payload: post
+  }
+}
+
+export const EDIT_POST_FAILURE = '@@EDIT_POST_FAILURE' as const
+export const editPostFailure = (error: string) => ({
+  type: EDIT_POST_FAILURE,
+  payload: error
+})
+
+export type EditPostAction 
+  = ReturnType<typeof editPostFailure>
+  | ReturnType<typeof editPostRequest>
+  | ReturnType<typeof editPostSuccess>
   
+
 export type PostAction 
   = FetchPostsAction
   | CreatePostAction
+  | EditPostAction

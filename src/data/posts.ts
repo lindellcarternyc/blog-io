@@ -31,3 +31,12 @@ export const createPost = async (data: CreatePostModel): Promise<PostModel> => {
   POSTS[newPost.id] = newPost
   return newPost
 }
+
+export const updatePost = async (data: PostModel): Promise<PostModel> => {
+  const updatedPost: PostModel = {
+    ...data,
+    editedAt: new Date()
+  }
+  POSTS[updatedPost.id] = updatedPost
+  return updatedPost
+}

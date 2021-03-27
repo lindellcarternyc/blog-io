@@ -49,3 +49,12 @@ export const createPost = async (data: CreatePostModel): Promise<PostModel> => {
     throw err
   }
 } 
+
+export const editPost = async (post: PostModel): Promise<PostModel> => {
+  try {
+    const newPost = await PostsCollection.updatePost(post)
+    return newPost
+  } catch (err) {
+    throw err
+  }
+}

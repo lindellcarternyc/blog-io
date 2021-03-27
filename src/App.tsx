@@ -35,9 +35,9 @@ const App = () => {
         <Switch>
           <Route path={ROUTES.Signup} component={Signup} />
           <Route path={ROUTES.Login} component={Login} />
+          <Route path={ROUTES.EditPost} component={EditPostPage} />
           <Route path={ROUTES.CreatePost} component={CreatePostPage} />
           <Route path={ROUTES.ViewPost} component={ViewPostPage} />
-          <Route path={ROUTES.EditPost} component={EditPostPage} />
           <Route path={ROUTES.Dashboard} component={DashboardPage} />
           <Route exact path={ROUTES.Home} component={HomePage} />
         </Switch>
