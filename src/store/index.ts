@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import postsState from './reducer/posts.reducer'
+// import postsState from './reducer/posts.reducer'
 import userState from './reducer/user.reducer'
+import postsState from './features/posts/posts.slice'
 
-export const initStore = () => {
+const initStore = () => {
   const store = configureStore({
     reducer: {
       postsState,

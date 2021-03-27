@@ -16,7 +16,8 @@ import Signup from './pages/Signup'
 
 import * as selectors from './store/selectors'
 import { useEffect } from 'react'
-import { fetchPosts } from './store/thunks/posts'
+
+import { fetchPosts } from './store/features/posts/posts.slice'
 
 const App = () => {
   const currentUser = useAppSelector(selectors.currentUser)
@@ -24,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     if (currentUser) {
-      dispatch(fetchPosts({ userId: currentUser.id }))
+      dispatch(fetchPosts(currentUser.id))
     }
   }, [currentUser, dispatch])
   return (

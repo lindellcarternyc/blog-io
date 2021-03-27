@@ -1,16 +1,14 @@
-import { useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 
 import * as selectors from '../store/selectors'
+import { useAppSelector } from '../store/hooks'
 import * as ROUTES from '../constants/routes'
 
 import { Grid, Button, Header } from 'semantic-ui-react'
 import PostPreviewList from '../components/PostPreviewList'
-// import { useEffect } from 'react'
-
 const Dashboard = (): JSX.Element => {
-  const currentUser = useSelector(selectors.currentUser)
-  const posts = useSelector(selectors.currentUserPosts)
+  const currentUser = useAppSelector(selectors.currentUser)
+  const posts = useAppSelector(selectors.currentUserPosts)
   const history = useHistory()
 
   if (!currentUser) {
@@ -18,7 +16,7 @@ const Dashboard = (): JSX.Element => {
   }
 
   const selectPost = (postID: string) => {
-    const url = ROUTES.ViewPost.replace(/:\w*/, postID)
+    const url = ROUTES.ViewPost.replace(/:postID/, postID)
     history.push(url)
   }
   

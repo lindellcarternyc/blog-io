@@ -6,7 +6,8 @@ import PostForm, { PostFormData } from '../forms/PostForm'
 
 import * as selectors from '../store/selectors'
 import * as ROUTES from '../constants/routes'
-import { editPost } from '../store/thunks/posts'
+
+import { editPost } from '../store/features/posts/posts.slice'
 
 const EditPost = (): JSX.Element => {
   const { postID } = useParams<{ postID: string }>()
@@ -27,10 +28,9 @@ const EditPost = (): JSX.Element => {
       editedAt: postToEdit.editedAt,
       id: postToEdit.id
     }))
-    .then(post => {
-      if (post) {
-        history.push(ROUTES.ViewPost.replace(/:postID/, post.id))
-      }
+    .then((action) => {
+      const { id } = action.payload as { id: string }
+      history.push(ROUTES.ViewPost.replace(/:postID/, id))
     })
     .catch(err => {
       console.log(err)

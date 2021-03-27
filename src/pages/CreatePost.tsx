@@ -5,9 +5,10 @@ import { Grid, Header } from 'semantic-ui-react'
 
 import PostForm, { PostFormData } from '../forms/PostForm'
 
-import { createPost } from '../store/thunks/posts'
 import * as selectors from '../store/selectors'
 import * as ROUTES from '../constants/routes'
+
+import { createPost } from '../store/features/posts/posts.slice'
 
 const CreatePost = (): JSX.Element => {
   const currentUser = useAppSelector(selectors.currentUser)
@@ -21,10 +22,9 @@ const CreatePost = (): JSX.Element => {
     dispatch(createPost({
       ...data,
       author: currentUser.id
-    })).then((newPost) => {
-      if (newPost) {
-        history.push(ROUTES.ViewPost.replace(/:\w*/, newPost.id))
-      }
+    })).then(({ payload }) => {
+      const { id } = payload as { id: string }
+      history.push(ROUTES.ViewPost.replace(/:postID/, id))
     })
   }
 

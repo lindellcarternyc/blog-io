@@ -1,7 +1,7 @@
 import { PostModel } from '../models/Post.model'
 import { UserModel } from '../models/User.model'
 
-type AsyncState<T> = {
+export type AsyncState<T> = {
   isLoading: boolean
   error: string | null
 } & T

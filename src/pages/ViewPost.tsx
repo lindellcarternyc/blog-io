@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux'
 import { Redirect, useHistory, useParams } from 'react-router'
 import PostView from '../components/PostView'
 
 import * as selectors from '../store/selectors'
+import { useAppSelector } from '../store/hooks'
 import * as ROUTES from '../constants/routes'
 
 const ViewPost = (): JSX.Element => {
   const { postID } = useParams<{ postID: string }>()
-  const post = useSelector(selectors.postById(postID))
+  const post = useAppSelector(selectors.postById(postID))
   const history = useHistory()
 
   if (!post) {
