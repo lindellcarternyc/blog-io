@@ -38,6 +38,15 @@ export const editPost = createAsyncThunk('posts/editPost', async (data: PostMode
   }
 })
 
+export const deletePost = createAsyncThunk('posts/deletePost', async (data: { id: string }) => {
+  try {
+    const deletedPostId = await api.deletePost(data.id)
+    return deletedPostId
+  } catch (err) {
+    throw err.message
+  }
+})
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState: DefaultPostsState,
@@ -85,6 +94,20 @@ const postsSlice = createSlice({
         
         const idx = state.posts.findIndex(post => post.id === action.payload.id)
         state.posts[idx] = action.payload
+      })
+      // 
+      .addCase(deletePost.pending, (state) => {
+        state.error = null
+        state.isLoading = true
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.error = null
+        state.isLoading = false
+        state.posts = state.posts.filter(post => post.id !== action.payload)
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        state.error = action.payload as string
+        state.isLoading = false
       })
   }
 })

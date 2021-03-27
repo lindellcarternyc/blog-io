@@ -62,3 +62,12 @@ export const editPost = async (post: PostModel): Promise<PostModel> => {
     throw err
   }
 }
+
+export const deletePost = async (id: string): Promise<string> => {
+  try {
+    const deletedPostId = await PostsCollection.deletePost({ id })
+    return deletedPostId
+  } catch (err) {
+    throw err
+  }
+}

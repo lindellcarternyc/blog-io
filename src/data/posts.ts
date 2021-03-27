@@ -40,3 +40,17 @@ export const updatePost = async (data: PostModel): Promise<PostModel> => {
   POSTS[updatedPost.id] = updatedPost
   return updatedPost
 }
+
+export const deletePost = async (data: { id: string }): Promise<string> => {
+  Object.keys(POSTS).reduce((posts, id) => {
+    if (id === data.id) {
+      return posts
+    }
+    return {
+      ...posts,
+      [id]: POSTS[id]
+    }
+  }, { })
+
+  return data.id
+}
