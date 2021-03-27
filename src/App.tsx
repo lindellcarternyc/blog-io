@@ -1,4 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
+import { useAppSelector, useAppDispatch } from './store/hooks'
 
 import * as ROUTES from './constants/routes'
 
@@ -12,15 +13,13 @@ import EditPostPage from './pages/EditPost'
 import ViewPostPage from './pages/ViewPost'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import { useSelector } from 'react-redux'
 
 import * as selectors from './store/selectors'
 import { useEffect } from 'react'
 import { fetchPosts } from './store/thunks/posts'
-import { useAppDispatch } from './store/dispatch'
 
 const App = () => {
-  const currentUser = useSelector(selectors.currentUser)
+  const currentUser = useAppSelector(selectors.currentUser)
   const dispatch = useAppDispatch()
 
   useEffect(() => {

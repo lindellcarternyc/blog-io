@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 import {
   Container,
@@ -9,12 +9,11 @@ import {
 
 import * as ROUTES from '../constants/routes'
 import { logoutRequest } from '../store/actions/logout.actions'
-import { useAppDispatch } from '../store/dispatch'
 import * as selectors from '../store/selectors'
 
 const Navbar = () => {
   const dispatch = useAppDispatch()
-  const isAuthenticated = useSelector(selectors.isAuthenticated)
+  const isAuthenticated = useAppSelector(selectors.isAuthenticated)
   const history = useHistory()
 
   const onClickLogout = () => {

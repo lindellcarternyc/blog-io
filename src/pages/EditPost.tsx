@@ -1,17 +1,16 @@
-import { useSelector } from 'react-redux'
 import { Redirect, useHistory, useParams } from 'react-router'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 import { Grid, Header } from 'semantic-ui-react'
 import PostForm, { PostFormData } from '../forms/PostForm' 
 
 import * as selectors from '../store/selectors'
 import * as ROUTES from '../constants/routes'
-import { useAppDispatch } from '../store/dispatch'
 import { editPost } from '../store/thunks/posts'
 
 const EditPost = (): JSX.Element => {
   const { postID } = useParams<{ postID: string }>()
-  const postToEdit = useSelector(selectors.postById(postID))
+  const postToEdit = useAppSelector(selectors.postById(postID))
   const dispatch = useAppDispatch()
   const history = useHistory()
 

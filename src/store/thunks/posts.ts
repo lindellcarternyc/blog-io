@@ -1,4 +1,4 @@
-import { AppDispatch } from '../dispatch'
+import { AppDispatch } from '../'
 
 import { fetchPostsSuccess, fetchPostsFailure, fetchPostsRequest, createPostFailure, createPostSuccess, createPostRequest, editPostRequest, editPostSuccess, editPostFailure } from '../actions/post.actions'
 import * as api from '../../api'

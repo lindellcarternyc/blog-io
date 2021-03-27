@@ -1,11 +1,21 @@
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import logger from 'redux-logger'
+import { configureStore } from '@reduxjs/toolkit'
 
-import reducer from './reducer'
-
+import postsState from './reducer/posts.reducer'
+import userState from './reducer/user.reducer'
 
 export const initStore = () => {
-  const store = createStore(reducer, applyMiddleware(thunk, logger))
+  const store = configureStore({
+    reducer: {
+      postsState,
+      userState
+    }
+  })
+
   return store
 }
+
+const store = initStore()
+export default store
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
